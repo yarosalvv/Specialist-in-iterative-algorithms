@@ -1,0 +1,41 @@
+# ================================
+# CLEAN
+# ================================
+clean:
+	rm -f *.o iterative_examples
+
+# ================================
+# BUILD EXAMPLE PROGRAM
+# ================================
+iterative_examples: iterative_examples.o narayana.o factorial_system.o inversion_table.o plus_one.o reverse_narayana.o
+	gcc -Wall -Wextra -std=c99 iterative_examples.o narayana.o factorial_system.o inversion_table.o plus_one.o reverse_narayana.o -o iterative_examples -lm
+
+# ================================
+# EXAMPLE OBJECT
+# ================================
+iterative_examples.o: examples/iterative_examples.c include/iterative_algorithms.h
+	gcc -Wall -Wextra -std=c99 -Iinclude -c examples/iterative_examples.c -o iterative_examples.o
+
+# ================================
+# STUDENT 2 MODULES
+# ================================
+narayana.o: src/algorithms/iterative/narayana.c include/iterative_algorithms.h
+	gcc -Wall -Wextra -std=c99 -Iinclude -c src/algorithms/iterative/narayana.c -o narayana.o
+
+factorial_system.o: src/algorithms/iterative/factorial_system.c include/iterative_algorithms.h
+	gcc -Wall -Wextra -std=c99 -Iinclude -c src/algorithms/iterative/factorial_system.c -o factorial_system.o
+
+inversion_table.o: src/algorithms/iterative/inversion_table.c include/iterative_algorithms.h
+	gcc -Wall -Wextra -std=c99 -Iinclude -c src/algorithms/iterative/inversion_table.c -o inversion_table.o
+
+plus_one.o: src/algorithms/iterative/plus_one.c include/iterative_algorithms.h
+	gcc -Wall -Wextra -std=c99 -Iinclude -c src/algorithms/iterative/plus_one.c -o plus_one.o
+
+reverse_narayana.o: src/algorithms/iterative/reverse_narayana.c include/iterative_algorithms.h
+	gcc -Wall -Wextra -std=c99 -Iinclude -c src/algorithms/iterative/reverse_narayana.c -o reverse_narayana.o
+
+# ================================
+# RUN EXAMPLES
+# ================================
+run: iterative_examples
+	./iterative_examples
